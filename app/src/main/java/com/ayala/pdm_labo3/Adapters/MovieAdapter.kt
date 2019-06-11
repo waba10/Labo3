@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ayala.pdm_labo3.Entity.Movie
 import com.ayala.pdm_labo3.R
@@ -16,14 +17,19 @@ class MovieAdapter internal constructor(context: Context) :  RecyclerView.Adapte
     private var games = emptyList<Movie>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter.MovieViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.cardview_movie, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item_movie, parent, false)
         return MovieViewHolder(itemView)
     }
 
     override fun getItemCount() = games.size
 
     override fun onBindViewHolder(holder: MovieAdapter.MovieViewHolder, position: Int) {
-        holder.bind(games[position])
+        //holder.bind(games[position])
+        val current = games[position]
+        holder.titulo.setText(current.title)
+        holder.duracion.setText(current.runtime)
+        holder.genero.setText(current.genre)
+
     }
 
     internal fun setMovies(lista: List<Movie>) {
@@ -32,7 +38,11 @@ class MovieAdapter internal constructor(context: Context) :  RecyclerView.Adapte
     }
 
     class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(movie: Movie) {
+        val titulo: TextView = itemView.findViewById(R.id.title_list_item)
+        val genero: TextView = itemView.findViewById(R.id.genre_list_item)
+        val duracion: TextView = itemView.findViewById(R.id.runtime_list_item)
+
+        /*fun bind(movie: Movie) {
             with(itemView) {
 
                 movie_title_cv.text=movie.title
@@ -49,6 +59,6 @@ class MovieAdapter internal constructor(context: Context) :  RecyclerView.Adapte
 
             }
 
-        }
+        }*/
     }
 }

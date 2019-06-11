@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ayala.pdm_labo3.Adapters.MovieAdapter
 import com.ayala.pdm_labo3.ViewModel.MovieViewModel
+import kotlinx.android.synthetic.main.movie_list_fragment.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,16 +17,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //En esta línea solo cambia rv_movies_list por el xml donde pongas el recycler
-        val recyclerView = findViewById<RecyclerView>(R.id.movie_list_rv)
+        val recyclerView = findViewById(R.id.movie_list_rv ) as RecyclerView
         val adapter = MovieAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-
-        val viewModel = ViewModelProviders.of(this).get(MovieViewModel::class.java)
-
-        viewModel.getAll().observe(this, Observer { books ->
-            books?.let { adapter.setMovies(it) }
+        val viewModel = MovieViewModel(application)
+        viewModel.allMovies.observe(this, Observer {
+            movie -> movie?.let { adapter.setMovies(it) }
         })
     }
 }

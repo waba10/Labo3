@@ -51,10 +51,11 @@ abstract class MovieRoomDatabase: RoomDatabase() {
         }
 
         suspend fun LlenarDB(movieDAO: MovieDao) {
-
+            val movie = Movie("Asd","asd","asd","asd","asd","asd","asd","asd","asd","asd","asd")
+            movieDAO.insertMovie(movie)
             //Para probar que funcione agrega unas peliculas acá para que asi se llene la base de datos
             //y por ende el recycler para que te las muestre
-
+            //Esperame un momento xD
         }
     }
 
