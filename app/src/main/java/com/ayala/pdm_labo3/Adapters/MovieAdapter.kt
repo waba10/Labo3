@@ -17,18 +17,14 @@ class MovieAdapter internal constructor(context: Context) :  RecyclerView.Adapte
     private var games = emptyList<Movie>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieAdapter.MovieViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.list_item_movie, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.cardview_movie, parent, false)
         return MovieViewHolder(itemView)
     }
 
     override fun getItemCount() = games.size
 
     override fun onBindViewHolder(holder: MovieAdapter.MovieViewHolder, position: Int) {
-        //holder.bind(games[position])
-        val current = games[position]
-        holder.titulo.setText(current.title)
-        holder.duracion.setText(current.runtime)
-        holder.genero.setText(current.genre)
+        holder.bind(games[position])
 
     }
 
@@ -38,11 +34,8 @@ class MovieAdapter internal constructor(context: Context) :  RecyclerView.Adapte
     }
 
     class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val titulo: TextView = itemView.findViewById(R.id.title_list_item)
-        val genero: TextView = itemView.findViewById(R.id.genre_list_item)
-        val duracion: TextView = itemView.findViewById(R.id.runtime_list_item)
 
-        /*fun bind(movie: Movie) {
+        fun bind(movie: Movie) {
             with(itemView) {
 
                 movie_title_cv.text=movie.title
@@ -59,6 +52,6 @@ class MovieAdapter internal constructor(context: Context) :  RecyclerView.Adapte
 
             }
 
-        }*/
+        }
     }
 }
